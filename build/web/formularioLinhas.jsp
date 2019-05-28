@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 27/05/2019, 23:05:09
+    Document   : formularioLinhas
+    Created on : 28/05/2019, 00:32:04
     Author     : Vinicius Reis
 --%>
 
@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%@include file="WEB-INF/jspf/header.jspf"%>
         <h1>Hello World!</h1>
     </body>
 </html>
