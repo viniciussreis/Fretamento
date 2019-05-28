@@ -5,16 +5,63 @@
  */
 package br.com.fretamento.bo;
 
+import br.com.fretamento.db.Db;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class Onibus {
     private int id;
-    private int idLinha;
+    private int idMotorista;
     private String placa;
+    private String numeracao;
+    
+    public static Onibus getListaOnibus() throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "SELECT * FROM ONIBUS";
+        PreparedStatement st = con.prepareStatement(SQL);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            return new Onibus(
+                    rs.getInt("ID_ONIBUS"),
+                    rs.getInt("ID_MOTORISTA"),
+                    rs.getString("PLACA"),
+                    rs.getString("NUMERACAO")
+            );
+        } else {
+            return null;
+        }
+    }
 
-    public Onibus(int id, int idLinha, String placa) {
+    public static void deletar(int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "DELETE * FROM ONIBUS WHERE ID_ONIBUS = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        rs.close();
+        st.close();
+        con.close();
+    }
+
+    public static void incluir(int idMotorista, String placa, String numeracao) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "INSERT INTO MOTORISTA VALUES(DEFAULT, ?, ?, ?)";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, idMotorista);
+        st.setString(2, placa);
+        st.setString(3, numeracao);
+        st.executeQuery();
+        st.close();
+        con.close();
+    }
+
+    public Onibus(int id, int idMotorista, String placa, String numeracao) {
         this.id = id;
-        this.idLinha = idLinha;
+        this.idMotorista = idMotorista;
         this.placa = placa;
+        this.numeracao = numeracao;
     }
 
     public int getId() {
@@ -25,12 +72,12 @@ public class Onibus {
         this.id = id;
     }
 
-    public int getIdLinha() {
-        return idLinha;
+    public int getIdMotorista() {
+        return idMotorista;
     }
 
-    public void setIdLinha(int idLinha) {
-        this.idLinha = idLinha;
+    public void setIdMotorista(int idMotorista) {
+        this.idMotorista = idMotorista;
     }
 
     public String getPlaca() {
@@ -40,5 +87,15 @@ public class Onibus {
     public void setPlaca(String placa) {
         this.placa = placa;
     }
+
+    public String getNumeracao() {
+        return numeracao;
+    }
+
+    public void setNumeracao(String numeracao) {
+        this.numeracao = numeracao;
+    }
+
+    
     
 }
