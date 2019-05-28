@@ -5,20 +5,68 @@
  */
 package br.com.fretamento.bo;
 
+import br.com.fretamento.db.Db;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Motorista {
-    
-    private int id;
-    private int idOnibus;
-    private String nome;
 
-    public Motorista(int id, int idOnibus, String nome) {
-        this.id = id;
-        this.idOnibus = idOnibus;
-        this.nome = nome;
+    private int id;
+    private String nome;
+    private String cnh;
+    private String registroGeral;
+    private String endereco;
+
+    public static Motorista getListaMotoristas() throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "SELECT * FROM MOTORISTA";
+        PreparedStatement st = con.prepareStatement(SQL);
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            return new Motorista(
+                    rs.getInt("ID_MOTORISTA"),
+                    rs.getString("NOME"),
+                    rs.getString("CNH"),
+                    rs.getString("REGISTRO_GERAL"),
+                    rs.getString("ENDERECO")
+            );
+        } else {
+            return null;
+        }
     }
-    
-    
+
+    public static void deletar(int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "DELETE * FROM MOTORISTA WHERE ID_MOTORISTA = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        rs.close();
+        st.close();
+        con.close();
+    }
+
+    public static void incluir(String nome, String cnh, String registroGeral,String endereco) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "INSERT INTO MOTORISTA VALUES(DEFAULT, ?, ?, ?, ?)";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setString(1, nome);
+        st.setString(2, cnh);
+        st.setString(3, registroGeral);
+        st.setString(4, endereco);
+        st.executeQuery();
+        st.close();
+        con.close();
+    }
+
+    public Motorista(int id, String nome, String cnh, String registroGeral, String endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.cnh = cnh;
+        this.registroGeral = registroGeral;
+        this.endereco = endereco;
+    }
 
     public int getId() {
         return id;
@@ -28,14 +76,6 @@ public class Motorista {
         this.id = id;
     }
 
-    public int getIdOnibus() {
-        return idOnibus;
-    }
-
-    public void setIdOnibus(int idOnibus) {
-        this.idOnibus = idOnibus;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -43,5 +83,29 @@ public class Motorista {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
+    public String getCnh() {
+        return cnh;
+    }
+
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
+    public String getRegistroGeral() {
+        return registroGeral;
+    }
+
+    public void setRegistroGeral(String registroGeral) {
+        this.registroGeral = registroGeral;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
 }

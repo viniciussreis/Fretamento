@@ -13,8 +13,8 @@ import java.sql.ResultSet;
 public class Linha {
 
     private int id;
-    private int idPassageiro;
-    private String partida;
+    private int idOnibus;
+    private String origem;
     private String destino;
 
     public static Linha getListaLinhas(String login, String password) throws Exception {
@@ -25,8 +25,8 @@ public class Linha {
         if (rs.next()) {
             return new Linha(
                     rs.getInt("ID_LINHA"),
-                    rs.getInt("ID_PASSAGEIRO"),
-                    rs.getString("PARTIDA"),
+                    rs.getInt("ID_ONIBUS"),
+                    rs.getString("ORIGEM"),
                     rs.getString("DESTINO")
             );
         } else {
@@ -56,10 +56,10 @@ public class Linha {
         con.close();
     }
 
-    public Linha(int id, int idPassageiro, String partida, String destino) {
+    public Linha(int id, int idOnibus, String origem, String destino) {
         this.id = id;
-        this.idPassageiro = idPassageiro;
-        this.partida = partida;
+        this.idOnibus = idOnibus;
+        this.origem = origem;
         this.destino = destino;
     }
 
@@ -71,20 +71,20 @@ public class Linha {
         this.id = id;
     }
 
-    public int getIdPassageiro() {
-        return idPassageiro;
+    public int getIdOnibus() {
+        return idOnibus;
     }
 
-    public void setIdPassageiro(int idPassageiro) {
-        this.idPassageiro = idPassageiro;
+    public void setIdOnibus(int idOnibus) {
+        this.idOnibus = idOnibus;
     }
 
-    public String getPartida() {
-        return partida;
+    public String getOrigem() {
+        return origem;
     }
 
-    public void setPartida(String partida) {
-        this.partida = partida;
+    public void setOrigem(String origem) {
+        this.origem = origem;
     }
 
     public String getDestino() {
@@ -94,4 +94,6 @@ public class Linha {
     public void setDestino(String destino) {
         this.destino = destino;
     }
+    
+    
 }
