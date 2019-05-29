@@ -15,6 +15,7 @@
     </head>
     <body>
         <h1>Java DB</h1>
+            <a href="formularioLinhas.jsp">Incluir Linha</a>
         <h2>Linhas existentes</h2>
         <%try{%>
         <% ArrayList<Linha> listaDeLinhas = Linha.getListaLinhas(); %>

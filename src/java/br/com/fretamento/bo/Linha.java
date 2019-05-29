@@ -52,13 +52,14 @@ public class Linha {
         con.close();
     }
 
-    public static void incluir(int numero, String partida, String destino) throws Exception {
+    public static void incluir(int numero, int idOnibus, String origem, String destino) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "INSERT INTO LINHA VALUES(DEFAULT, ?, ?, ?)";
+        String SQL = "INSERT INTO LINHA VALUES(DEFAULT, ?, ?, ?, ?)";
         PreparedStatement st = con.prepareStatement(SQL);
-        st.setInt(1, numero);
-        st.setString(2, partida);
-        st.setString(3, destino);
+        st.setInt(1, idOnibus);
+        st.setInt(2, numero);
+        st.setString(3, origem);
+        st.setString(4, destino);
         st.executeUpdate();
         st.close();
         con.close();
@@ -70,6 +71,9 @@ public class Linha {
         this.numero = numero;
         this.origem = origem;
         this.destino = destino;
+    }
+
+    public Linha() {
     }
 
     public int getId() {
