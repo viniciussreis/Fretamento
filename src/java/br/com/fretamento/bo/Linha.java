@@ -51,11 +51,11 @@ public class Linha {
         PreparedStatement st = con.prepareStatement(SQL);
         st.setString(1, partida);
         st.setString(2, destino);
-        st.executeQuery();
+        st.executeUpdate();
         st.close();
         con.close();
     }
-
+        
     public Linha(int id, int idOnibus, String origem, String destino) {
         this.id = id;
         this.idOnibus = idOnibus;

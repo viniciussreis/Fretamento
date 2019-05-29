@@ -52,14 +52,25 @@ public class Passageiro {
 
     public static void incluir(int idLinha, String nome, String cpf, String registroGeral, String endereco) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "INSERT INTO MOTORISTA VALUES(DEFAULT, ?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO PASSAGEIRO VALUES(1, ?, ?, ?, ?, ?)";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setInt(1, idLinha);
         st.setString(2, nome);
         st.setString(3, cpf);
         st.setString(4, registroGeral);
         st.setString(5, endereco);
-        st.executeQuery();
+        st.executeUpdate();
+        st.close();
+        con.close();
+    }
+
+    public void atualizarLinha(int idPassageiro, int novoIdLinha) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "UPDATE PASSAGEIRO SET ID_LINHA=? WHERE ID_PASSAGEIRO = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, novoIdLinha);
+        st.setInt(2, idPassageiro);
+        st.executeUpdate();
         st.close();
         con.close();
     }
