@@ -9,6 +9,7 @@ import br.com.fretamento.db.Db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Linha {
 
@@ -17,21 +18,25 @@ public class Linha {
     private String origem;
     private String destino;
 
-    public static Linha getListaLinhas(String login, String password) throws Exception {
+    public static ArrayList<Linha> getListaLinhas() throws Exception {
         Connection con = Db.getConnection();
         String SQL = "SELECT * FROM LINHA";
         PreparedStatement st = con.prepareStatement(SQL);
         ResultSet rs = st.executeQuery();
-        if (rs.next()) {
-            return new Linha(
+        
+        ArrayList<Linha> listaDeLinhas = new ArrayList();
+        while(rs.next()) {
+            Linha linha = new Linha(
                     rs.getInt("ID_LINHA"),
                     rs.getInt("ID_ONIBUS"),
                     rs.getString("ORIGEM"),
                     rs.getString("DESTINO")
             );
-        } else {
-            return null;
-        }
+            
+            listaDeLinhas.add(linha);
+        } 
+        
+        return listaDeLinhas;
     }
 
     public static void deletar(int id) throws Exception {
