@@ -15,6 +15,7 @@ public class Linha {
 
     private int id;
     private int idOnibus;
+    private int numero;
     private String origem;
     private String destino;
 
@@ -29,6 +30,7 @@ public class Linha {
             Linha linha = new Linha(
                     rs.getInt("ID_LINHA"),
                     rs.getInt("ID_ONIBUS"),
+                    rs.getInt("NUMERO"),
                     rs.getString("ORIGEM"),
                     rs.getString("DESTINO")
             );
@@ -50,20 +52,22 @@ public class Linha {
         con.close();
     }
 
-    public static void incluir(String partida, String destino) throws Exception {
+    public static void incluir(int numero, String partida, String destino) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "INSERT INTO LINHA VALUES(DEFAULT, ?, ?)";
+        String SQL = "INSERT INTO LINHA VALUES(DEFAULT, ?, ?, ?)";
         PreparedStatement st = con.prepareStatement(SQL);
-        st.setString(1, partida);
-        st.setString(2, destino);
+        st.setInt(1, numero);
+        st.setString(2, partida);
+        st.setString(3, destino);
         st.executeUpdate();
         st.close();
         con.close();
     }
-        
-    public Linha(int id, int idOnibus, String origem, String destino) {
+
+    public Linha(int id, int idOnibus, int numero, String origem, String destino) {
         this.id = id;
         this.idOnibus = idOnibus;
+        this.numero = numero;
         this.origem = origem;
         this.destino = destino;
     }
@@ -84,6 +88,14 @@ public class Linha {
         this.idOnibus = idOnibus;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
     public String getOrigem() {
         return origem;
     }
@@ -99,6 +111,5 @@ public class Linha {
     public void setDestino(String destino) {
         this.destino = destino;
     }
-    
-    
+        
 }
