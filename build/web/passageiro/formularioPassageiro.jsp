@@ -1,3 +1,31 @@
+<%@page import="br.com.fretamento.bo.Passageiro"%>
+<%    
+    Passageiro passageiro = new Passageiro();
+    int id = 0;
+    String nome = "";
+    String cpf = "";
+    String registroGeral = "";
+    String endereco = "";
+    int numeroLinha = 0;
+    
+    String valorBotao = "Cadastrar";
+    
+    if(request.getParameter("index") != null){
+       id = Integer.parseInt(request.getParameter("index"));
+       Passageiro p = passageiro.getPassageiroById(id);
+       nome = p.getNome();
+       cpf = p.getCpf();
+       registroGeral = p.getRegistroGeral();
+       endereco = p.getEndereco();
+       numeroLinha = p.getIdLinha();
+       
+       valorBotao = "Salvar";
+    }
+    
+    
+    
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,16 +38,21 @@
         <hr>
         <form action="pesquisaPassageiros.jsp">
             <label>Nome</label>
-            <input type="text" name="nome" id="nome"/>
+            <input type="text" name="nome" id="nome" value="<%= nome %>"/>
             <label>CPF</label>
-            <input type="text" name="cpf" id="cpf"/>
+            <input type="text" name="cpf" id="cpf" value="<%= cpf %>"/>
             <label>RG</label>
-            <input type="text" name="registroGeral" id="registroGeral"/>
+            <input type="text" name="registroGeral" id="registroGeral" value="<%= registroGeral %>"/>
             <label>Endereco</label>
-            <input type="text" name="endereco" id="endereco"/>
+            <input type="text" name="endereco" id="endereco" value="<%= endereco %>"/>
             <label>Numero da Linha</label>
-            <input type="text" name="idLinha" id="idLinha"/>
-            <input type="submit" value="Cadastrar" name="cadastrar"/>
+            <input type="text" name="idLinha" id="idLinha" value="<%= numeroLinha %>"/>
+            <input type="submit" value="<%= valorBotao %>" name="cadastrar"/>
+            
+            <% if(valorBotao.equals("Salvar")){%>
+                <input type="hidden" name="index" value="<%= id %>">
+            <% } %>
+            
         </form>
     </body>
 </html>

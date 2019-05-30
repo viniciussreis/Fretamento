@@ -60,6 +60,28 @@ public class Passageiro {
         
         return listaPassageiros;
     }
+    
+    public static Passageiro getPassageiroById(int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "SELECT * FROM PASSAGEIRO WHERE ID_PASSAGEIRO = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        
+        Passageiro p = new Passageiro();
+        if (rs.next()) {
+            p = new Passageiro(
+                    rs.getInt("ID_PASSAGEIRO"),
+                    rs.getInt("ID_LINHA"),
+                    rs.getString("NOME"),
+                    rs.getString("CPF"),
+                    rs.getString("REGISTRO_GERAL"),
+                    rs.getString("ENDERECO")
+            );
+        }
+        
+        return p;
+    }
 
     public static void deletar(int id) throws Exception {
         Connection con = Db.getConnection();
@@ -81,6 +103,22 @@ public class Passageiro {
         st.setString(3, cpf);
         st.setString(4, registroGeral);
         st.setString(5, endereco);
+        st.executeUpdate();
+        st.close();
+        con.close();
+    }
+    
+    public static void atualizar(int id, int idLinha, String nome, String cpf, String registroGeral, String endereco) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = 
+        "UPDATE PASSAGEIRO SET ID_LINHA = ?, NOME = ?, CPF = ?, REGISTRO_GERAL = ?, ENDERECO = ? WHERE ID_PASSAGEIRO = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, idLinha);
+        st.setString(2, nome);
+        st.setString(3, cpf);
+        st.setString(4, registroGeral);
+        st.setString(5, endereco);
+        st.setInt(6, id);
         st.executeUpdate();
         st.close();
         con.close();
