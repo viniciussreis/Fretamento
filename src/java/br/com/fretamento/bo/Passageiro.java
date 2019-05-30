@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    public static ArrayList<Linha> getListaLinhas() throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "SELECT * FROM LINHA";
+        PreparedStatement st = con.prepareStatement(SQL);
+        ResultSet rs = st.executeQuery();
+        
+        ArrayList<Linha> listaDeLinhas = new ArrayList();
+        while(rs.next()) {
+            Linha linha = new Linha(
+                    rs.getInt("ID_LINHA"),
+                    rs.getInt("ID_ONIBUS"),
+                    rs.getInt("NUMERO"),
+                    rs.getString("ORIGEM"),
+                    rs.getString("DESTINO")
+            );
+            
+            listaDeLinhas.add(linha);
+        } 
+        
+        return listaDeLinhas;
+    }
  */
 package br.com.fretamento.bo;
 
@@ -9,6 +27,7 @@ import br.com.fretamento.db.Db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class Passageiro {
@@ -20,13 +39,15 @@ public class Passageiro {
     private String registroGeral;
     private String endereco;
     
-    public static Passageiro getListaPassageiros() throws Exception {
+    public static ArrayList<Passageiro> getListaPassageiros() throws Exception {
         Connection con = Db.getConnection();
         String SQL = "SELECT * FROM PASSAGEIRO";
         PreparedStatement st = con.prepareStatement(SQL);
         ResultSet rs = st.executeQuery();
-        if (rs.next()) {
-            return new Passageiro(
+        
+        ArrayList<Passageiro> listaPassageiros = new ArrayList();
+        while (rs.next()) {
+            Passageiro passageiro = new Passageiro(
                     rs.getInt("ID_PASSAGEIRO"),
                     rs.getInt("ID_LINHA"),
                     rs.getString("NOME"),
@@ -34,9 +55,10 @@ public class Passageiro {
                     rs.getString("REGISTRO_GERAL"),
                     rs.getString("ENDERECO")
             );
-        } else {
-            return null;
+            listaPassageiros.add(passageiro);
         }
+        
+        return listaPassageiros;
     }
 
     public static void deletar(int id) throws Exception {
@@ -52,7 +74,7 @@ public class Passageiro {
 
     public static void incluir(int idLinha, String nome, String cpf, String registroGeral, String endereco) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "INSERT INTO PASSAGEIRO VALUES(1, ?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO PASSAGEIRO VALUES(DEFAULT, ?, ?, ?, ?, ?)";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setInt(1, idLinha);
         st.setString(2, nome);
@@ -82,6 +104,9 @@ public class Passageiro {
         this.cpf = cpf;
         this.registroGeral = registroGeral;
         this.endereco = endereco;
+    }
+    
+    public Passageiro () {
     }
 
     public int getId() {
