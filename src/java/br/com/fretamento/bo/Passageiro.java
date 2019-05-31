@@ -85,11 +85,10 @@ public class Passageiro {
 
     public static void deletar(int id) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "DELETE * FROM PASSAGEIRO WHERE ID_PASSAGEIRO = ?";
+        String SQL = "DELETE FROM PASSAGEIRO WHERE ID_PASSAGEIRO = ?";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setInt(1, id);
-        ResultSet rs = st.executeQuery();
-        rs.close();
+        st.executeUpdate();
         st.close();
         con.close();
     }
