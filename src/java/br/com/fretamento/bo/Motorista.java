@@ -9,6 +9,7 @@ import br.com.fretamento.db.Db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Motorista {
 
@@ -17,23 +18,25 @@ public class Motorista {
     private String cnh;
     private String registroGeral;
     private String endereco;
-
-    public static Motorista getListaMotoristas() throws Exception {
+    
+    public static ArrayList<Motorista> getListaMotoristas() throws Exception {
         Connection con = Db.getConnection();
         String SQL = "SELECT * FROM MOTORISTA";
         PreparedStatement st = con.prepareStatement(SQL);
         ResultSet rs = st.executeQuery();
-        if (rs.next()) {
-            return new Motorista(
+        
+        ArrayList<Motorista> listaMotoristas = new ArrayList();
+        while (rs.next()) {
+            Motorista motorista=  new Motorista(
                     rs.getInt("ID_MOTORISTA"),
                     rs.getString("NOME"),
                     rs.getString("CNH"),
                     rs.getString("REGISTRO_GERAL"),
                     rs.getString("ENDERECO")
             );
-        } else {
-            return null;
+            listaMotoristas.add(motorista);
         }
+        return listaMotoristas;
     }
 
     public static void deletar(int id) throws Exception {
@@ -108,4 +111,5 @@ public class Motorista {
         this.endereco = endereco;
     }
 
+    public Motorista(){}
 }
