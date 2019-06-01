@@ -9,6 +9,7 @@ import br.com.fretamento.db.Db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class Onibus {
@@ -17,21 +18,24 @@ public class Onibus {
     private String placa;
     private String numeracao;
     
-    public static Onibus getListaOnibus() throws Exception {
+    public static ArrayList<Onibus> getListaOnibus() throws Exception {
         Connection con = Db.getConnection();
         String SQL = "SELECT * FROM ONIBUS";
         PreparedStatement st = con.prepareStatement(SQL);
         ResultSet rs = st.executeQuery();
-        if (rs.next()) {
-            return new Onibus(
+        ArrayList<Onibus> listaDeOnibus = new ArrayList();
+        while(rs.next()) {
+            Onibus onibus = new Onibus(
                     rs.getInt("ID_ONIBUS"),
                     rs.getInt("ID_MOTORISTA"),
                     rs.getString("PLACA"),
                     rs.getString("NUMERACAO")
             );
-        } else {
-            return null;
-        }
+            
+            listaDeOnibus.add(onibus);
+        } 
+        
+        return listaDeOnibus;
     }
 
     public static void deletar(int id) throws Exception {
@@ -64,6 +68,9 @@ public class Onibus {
         this.numeracao = numeracao;
     }
 
+    public Onibus() {
+    }
+    
     public int getId() {
         return id;
     }

@@ -4,12 +4,15 @@
     Author     : Vinicius Reis
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="br.com.fretamento.bo.Onibus"%>
 <%@page import="br.com.fretamento.bo.Linha"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%
     int id = 0;
+    ArrayList<Onibus> listaDeOnibus = Onibus.getListaOnibus();
     
     Linha linha = new Linha();
     if(request.getParameter("cadastrar") != null){
@@ -55,8 +58,15 @@
         <form>
             <label>Número da Linha</label>
             <input type="text" name="numeroLinha" id="numeroLinha" value="<%= linha.getNumero() %>"/>
+            
             <label>Onibus</label>
-            <input type="text" name="idOnibus" id="idOnibus" value="<%= linha.getIdOnibus() %>"/>
+            <select name="idLinha">
+                <option></option>
+                <% for (Onibus onibus : listaDeOnibus) {%>
+                    <option value="<%= onibus.getId() %>"><%= onibus.getNumeracao()%></option>          
+                <% }%>
+            </select>
+            
             <label>Origem</label>
             <input type="text" name="origem" id="origem" value="<%= linha.getOrigem() %>"/>
             <label>Destino</label>
