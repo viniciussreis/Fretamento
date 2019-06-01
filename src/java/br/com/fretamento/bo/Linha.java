@@ -18,6 +18,27 @@ public class Linha {
     private int numero;
     private String origem;
     private String destino;
+    
+    public static Linha getLinhaById(int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "SELECT * FROM LINHA WHERE ID_LINHA = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        
+        Linha linha = new Linha();
+        if (rs.next()) {
+            linha = new Linha(
+                    rs.getInt("ID_LINHA"),
+                    rs.getInt("ID_ONIBUS"),
+                    rs.getInt("NUMERO"),
+                    rs.getString("ORIGEM"),
+                    rs.getString("DESTINO")
+            );
+        }
+        
+        return linha;
+    }
 
     public static ArrayList<Linha> getListaLinhas() throws Exception {
         Connection con = Db.getConnection();
@@ -39,6 +60,21 @@ public class Linha {
         } 
         
         return listaDeLinhas;
+    }
+    
+        public static void atualizar(Linha linha, int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = 
+        "UPDATE LINHA SET ID_ONIBUS = ?, NUMERO = ?, ORIGEM = ?, DESTINO = ? WHERE ID_LINHA = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, linha.getIdOnibus());
+        st.setInt(2, linha.getNumero());
+        st.setString(3, linha.getOrigem());
+        st.setString(4, linha.getDestino());
+        st.setInt(5, id);
+        st.executeUpdate();
+        st.close();
+        con.close();
     }
 
     public static void deletar(int id) throws Exception {
@@ -73,6 +109,8 @@ public class Linha {
     }
 
     public Linha() {
+        this.origem = "";
+        this.destino = "";
     }
 
     public int getId() {
