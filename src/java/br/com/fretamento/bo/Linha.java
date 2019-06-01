@@ -43,11 +43,10 @@ public class Linha {
 
     public static void deletar(int id) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "DELETE * FROM LINHA WHERE ID_LINHA = ?";
+        String SQL = "DELETE FROM LINHA WHERE ID_LINHA = ?";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setInt(1, id);
-        ResultSet rs = st.executeQuery();
-        rs.close();
+        st.executeUpdate();
         st.close();
         con.close();
     }

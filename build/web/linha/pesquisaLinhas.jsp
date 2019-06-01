@@ -7,6 +7,21 @@
 <%@page import="br.com.fretamento.bo.Linha"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<% Linha linhaSelecionada = new Linha();%>
+
+<%
+    try {
+        if (request.getParameter("id") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            linhaSelecionada.deletar(id);
+            response.sendRedirect(request.getRequestURI());
+        }
+    } catch (Exception e) {
+        System.out.println("erro no método deletar" + e);
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,6 +42,7 @@
                 <th>Numero da Linha</th>
                 <th>Quantidade</th>
                 <th>Valor</th>
+                <th>Opções</th>
             </tr>
             <% for(Linha linha: listaDeLinhas){%>
             <tr>
@@ -35,6 +51,10 @@
                 <td><%=linha.getNumero()%></td>
                 <td><%=linha.getOrigem()%></td>
                 <td><%=linha.getDestino()%></td>
+                <td>
+                    <a href="formularioLinhas.jsp?id=<%= linha.getId() %>">Editar</a>
+                    <a href="pesquisaLinhas.jsp?id=<%= linha.getId() %>">Excluir</a>
+                </td>
             </tr>
             <%}%>
         <%}else{%>
