@@ -13,15 +13,16 @@
         if (request.getParameter("cadastrar") != null) {
             String placa = request.getParameter("placa");;
             String numeracao = request.getParameter("numeracao");;
+            int idMotorista = Integer.parseInt(request.getParameter("idMotorista"));
             int id=0;
             if (request.getParameter("cadastrar").equals("Cadastrar")) {
-            //    onibus.incluir(placa, numeracao);
+                onibus.incluir(idMotorista, placa, numeracao);
             }
         }
 
         if (request.getParameter("deletar") != null) {
            int id = Integer.parseInt(request.getParameter("deletar"));
-            motorista.deletar(id);
+            onibus.deletar(id);
            response.sendRedirect(request.getRequestURI());
         }
 
@@ -31,9 +32,44 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Lista de Ônibus</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Onibus Existentes</h1>
+        <a href="formularioOnibus.jsp" >Incluir Ônibus</a>
+        <form>  
+        <%try {%>
+            <% ArrayList<Onibus> listaOnibus = Onibus.getListaOnibus(); %>
+            <%if (listaOnibus != null && !listaOnibus.isEmpty()) { %>
+        
+        <table border="1">
+            
+            <tr>
+                    <th>ID Onibus</th>
+                    <th>Placa</th>
+                    <th>Numeracao</th>
+                   
+            </tr>
+            
+                <% for (Onibus p : listaOnibus) {%>
+
+                <tr>
+                        <td><%=p.getId()%></td>
+                        <td><%=p.getPlaca()%></td>
+                        <td><%=p.getNumeracao()%></td>
+                   
+                <td>
+                        <a href="formularioOnibus.jsp?index=<%= p.getId()%>">Editar |</a>
+                        <a href="pesquisaOnibus.jsp?deletar=<%= p.getId()%>">Deletar</a>
+                    </td>
+                </tr><%}%>
+                <%} else {%>
+                <h3>Não existem ônibus cadastrados</h3>
+                <% } %>
+            </table>
+            <%} catch (Exception e) {%>
+            <h3 style="color: red"> <%= e.getMessage()%> </h3>
+            <%}%>
+       </form>     
     </body>
 </html>
