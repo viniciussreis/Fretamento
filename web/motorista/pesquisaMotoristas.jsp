@@ -50,7 +50,7 @@
                     <th>CNH</th>
                     <th>RG</th>
                     <th>Endereco</th>
-                    <th>Opcoes</th>
+                    <th>Opções</th>
                 </tr>
                 <% for (Motorista p : listaMotoristas) {%>
 

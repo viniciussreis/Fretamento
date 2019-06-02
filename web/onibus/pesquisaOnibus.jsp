@@ -35,8 +35,9 @@
         <title>Lista de Ônibus</title>
     </head>
     <body>
-        <h1>Onibus Existentes</h1>
+        <h1>Ônibus Existentes</h1>
         <a href="formularioOnibus.jsp" >Incluir Ônibus</a>
+      
         <form>  
         <%try {%>
             <% ArrayList<Onibus> listaOnibus = Onibus.getListaOnibus(); %>
@@ -48,7 +49,7 @@
                     <th>ID Onibus</th>
                     <th>Placa</th>
                     <th>Numeracao</th>
-                   
+                    <th>Opções</th>
             </tr>
             
                 <% for (Onibus p : listaOnibus) {%>
