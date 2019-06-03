@@ -1,9 +1,7 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
-<h2>Projeto POO - Fretamento</h2>
-<ul>
-    <li><a href="linha/pesquisaLinhas.jsp">Linha</a></li>
-    <li><a href="motorista/pesquisaMotoristas.jsp">Motorista</a></li>
-    <li><a href="onibus/pesquisaOnibus.jsp">Onibus</a></li>
-    <li><a href="passageiro/pesquisaPassageiros.jsp">Passageiros</a></li>
-</ul>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><%= session.getAttribute("pageTitle") %></title>
+</head>

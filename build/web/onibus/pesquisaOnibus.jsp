@@ -30,11 +30,8 @@
     }
 %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Ônibus</title>
-    </head>
-    <body>
+    <% session.setAttribute("pageTitle", "Listagem de ônibus"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>    <body>
         <h1>Ônibus Existentes</h1>
         <a href="formularioOnibus.jsp" >Incluir Ônibus</a>
       

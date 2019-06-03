@@ -20,10 +20,8 @@
     
 %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Incluir Ônibus</title>
-    </head>
+    <% session.setAttribute("pageTitle", "Form ônibus"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
         <h1>Formulário para adição de Ônibus</h1>
         <form action="pesquisaOnibus.jsp"> 

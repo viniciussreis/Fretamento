@@ -32,10 +32,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Incluir Passageiro - Fretado</title>
-    </head>
+    <% session.setAttribute("pageTitle", "Form passageiro"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
         <h1>Formulário Adicionar Passageiro</h1>
         <hr>

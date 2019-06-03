@@ -24,16 +24,12 @@
        linha.incluir(numero, idOnibus, origem, destino);
        response.sendRedirect("pesquisaLinhas.jsp");
     }
-%>
-
-<%
+    
     if(request.getParameter("id") != null){
        id =  Integer.parseInt(request.getParameter("id"));
        linha = linha.getLinhaById(id);
     }
-%>
 
-<%
     if (request.getParameter("alterar") != null) {
         linha.setIdOnibus(Integer.parseInt(request.getParameter("idOnibus")));
         linha.setNumero(Integer.parseInt(request.getParameter("numeroLinha")));
@@ -48,12 +44,10 @@
 
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <% session.setAttribute("pageTitle", "Form linha"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
-        <h1>Formulário Adicionar Linha</h1>
+        <h1>Formulário <%= request.getParameter("id") == null ? "Adicionar" : "Editar" %> Linha</h1>
         <hr>
         <form>
             <label>Número da Linha</label>
@@ -63,7 +57,7 @@
             <select name="idLinha">
                 <option></option>
                 <% for (Onibus onibus : listaDeOnibus) {%>
-                    <option value="<%= onibus.getId() %>"><%= onibus.getNumeracao()%></option>          
+                    <option value="<%= onibus.getId() %>" <%= linha.getIdOnibus() == onibus.getId() ? "selected" : "" %>><%= onibus.getNumeracao()%></option>
                 <% }%>
             </select>
             

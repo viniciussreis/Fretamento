@@ -7,12 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <% session.setAttribute("pageTitle", "Home"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
-        <%@include file="WEB-INF/jspf/header.jspf"%>
-        <h1>Hello World!</h1>
+        <h2>Projeto POO - Fretamento</h2>
+        <ul>
+            <li><a href="linha/pesquisaLinhas.jsp">Linha</a></li>
+            <li><a href="motorista/pesquisaMotoristas.jsp">Motorista</a></li>
+            <li><a href="onibus/pesquisaOnibus.jsp">Onibus</a></li>
+            <li><a href="passageiro/pesquisaPassageiros.jsp">Passageiros</a></li>
+        </ul>
     </body>
 </html>

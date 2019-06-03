@@ -39,15 +39,8 @@
 
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar passageiros - Fretado</title>
-    </head>
-    <body>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Passageiros - Fretado</title>
-    </head>
+    <% session.setAttribute("pageTitle", "Listagem de passageiro"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
         <h1>Java DB</h1>
         <a href="formularioPassageiro.jsp">Incluir Passageiro</a>

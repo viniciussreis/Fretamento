@@ -32,10 +32,8 @@
     }
 %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <% session.setAttribute("pageTitle", "Listagem de motorista"); %>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
         <h1>Motoristas Existentes</h1>
         <a href="formularioMotorista.jsp">Incluir motorista</a>
