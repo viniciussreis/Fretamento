@@ -22,6 +22,7 @@
 <html>
     <% session.setAttribute("pageTitle", "Form ônibus"); %>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
+    <%@include file="../WEB-INF/jspf/navbar.jspf" %>
     <body>
         <h1>Formulário para adição de Ônibus</h1>
         <form action="pesquisaOnibus.jsp"> 

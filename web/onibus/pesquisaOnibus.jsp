@@ -31,7 +31,9 @@
 %>
 <html>
     <% session.setAttribute("pageTitle", "Listagem de ônibus"); %>
-    <%@include file="../WEB-INF/jspf/header.jspf" %>    <body>
+    <%@include file="../WEB-INF/jspf/header.jspf" %>
+    <%@include file="../WEB-INF/jspf/navbar.jspf" %>
+    <body>
         <h1>Ônibus Existentes</h1>
         <a href="formularioOnibus.jsp" >Incluir Ônibus</a>
       

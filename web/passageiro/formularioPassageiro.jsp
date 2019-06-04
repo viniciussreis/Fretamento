@@ -34,6 +34,7 @@
 <html>
     <% session.setAttribute("pageTitle", "Form passageiro"); %>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
+    <%@include file="../WEB-INF/jspf/navbar.jspf" %>
     <body>
         <h1>Formulário Adicionar Passageiro</h1>
         <hr>

@@ -26,41 +26,59 @@
 <html>
     <% session.setAttribute("pageTitle", "Listagem de linhas"); %>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
+    <%@include file="../WEB-INF/jspf/navbar.jspf" %>
     <body>
-        <h1>Java DB</h1>
-        <a href="formularioLinhas.jsp">Incluir Linha</a>
-        <h2>Linhas existentes</h2>
+        <div class="text-left mb-3 text-center">
+            <h2>Linhas existentes</h2>
+            <a href="formularioLinhas.jsp">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
         <%try {%>
         <% ArrayList<Linha> listaDeLinhas = Linha.getListaLinhas(); %>
         <%if (listaDeLinhas != null && !listaDeLinhas.isEmpty()) { %>
-        <table border="1">
-            <tr>
-                <th>ID Linha</th>
-                <th>ID Onibus</th>
-                <th>Numero da Linha</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
-                <th>Opções</th>
-            </tr>
+        <div class="container">
+            <div class="row m-auto text-center pt-2 text-secondary" style="background-color: aliceblue; height: 40px;">
+                <div class="col-2">ID Linha</div>
+                <div class="col-2">ID Onibus</div>
+                <div class="col-2">Número linha</div>
+                <div class="col-2">Origem</div>
+                <div class="col-2">Destino</div>
+                <div class="col-2">Opções</div>
+            </div>
             <% for (Linha linha : listaDeLinhas) {%>
-            <tr>
-                <td><%=linha.getId()%></td>
-                <td><%=linha.getIdOnibus()%></td>
-                <td><%=linha.getNumero()%></td>
-                <td><%=linha.getOrigem()%></td>
-                <td><%=linha.getDestino()%></td>
-                <td>
-                    <a href="formularioLinhas.jsp?id=<%= linha.getId()%>">Editar</a>
-                    <a href="pesquisaLinhas.jsp?id=<%= linha.getId()%>">Excluir</a>
-                </td>
-            </tr>
+            <div class="row m-auto text-center pt-2 text-truncate" style="height: 40px">
+                <div class="col-2 mt-2">
+                    <%=linha.getId()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=linha.getIdOnibus()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=linha.getNumero()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=linha.getOrigem()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=linha.getDestino()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <a href="formularioLinhas.jsp?id=<%= linha.getId()%>">
+                        <i style="color: gray" class="fa fa-edit"></i>
+                    </a>
+                    <a href="pesquisaLinhas.jsp?id=<%= linha.getId()%>">
+                        <i style="color: red" class="ml-2 fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
             <%}%>
             <%} else {%>
             <h3>Não existem linhas cadastradas</h3>
             <% } %>
-        </table>
-        <%} catch (Exception e) {%>
-        <h3 style="color: red"> <%= e.getMessage()%> </h3>
-        <%}%>
+            <%} catch (Exception e) {%>
+            <h3 style="color: red"> <%= e.getMessage()%> </h3>
+            <%}%>
+        </div>
     </body>
 </html>

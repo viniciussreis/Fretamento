@@ -1,0 +1,11 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
+        <a class="nav-item nav-link col-auto" href="http://localhost:8084/Fretamento/index.jsp" style="color: white;">Home</a>
+        <a class="nav-item nav-link col-auto" href="http://localhost:8084/Fretamento/linha/pesquisaLinhas.jsp" style="color: white;">Linha</a>
+        <a class="nav-item nav-link col-auto" href="http://localhost:8084/Fretamento/motorista/pesquisaMotoristas.jsp" style="color: white;">Motorista</a>
+        <a class="nav-item nav-link col-auto" href="http://localhost:8084/Fretamento/onibus/pesquisaOnibus.jsp" style="color: white;">Onibus</a>
+            <a class="nav-item nav-link col-auto" href="http://localhost:8084/Fretamento/passageiro/pesquisaPassageiros.jsp" style="color: white;">Passageiro</a>
+        <!--        <a class="nav-item nav-link" href="#">Home</a>-->
+    </div>
+</nav>

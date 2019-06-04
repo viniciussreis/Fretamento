@@ -41,4 +41,31 @@
             <% }%>
         </form>
     </body>
+    <body>
+        <h1>Formulário <%= request.getParameter("id") == null ? "Adicionar" : "Editar"%> Motorista</h1>
+        <hr>
+        <form>
+            <label>Número da Linha</label>
+            <input type="text" name="numeroLinha" id="numeroLinha" value="<%= linha.getNumero()%>"/>
+
+            <label>Onibus</label>
+            <select name="idOnibus">
+                <option></option>
+                <% for (Onibus onibus : listaDeOnibus) {%>
+                <option value="<%= onibus.getId()%>" <%= linha.getIdOnibus() == onibus.getId() ? "selected" : ""%>><%= onibus.getNumeracao()%></option>
+                <% }%>
+            </select>
+
+            <label>Origem</label>
+            <input type="text" name="origem" id="origem" value="<%= linha.getOrigem()%>"/>
+            <label>Destino</label>
+            <input type="text" name="destino" id="destido" value="<%= linha.getDestino()%>"/>
+            <%if (request.getParameter("id") == null) {%>
+            <input type="submit" value="Cadastrar" name="cadastrar"/>
+            <%} else {%>
+            <input type="submit" value="Alterar" name="alterar" />
+            <%}%>
+            <input type="hidden" name="id" value="<%= id%>"/>
+        </form>
+    </body>
 </html>

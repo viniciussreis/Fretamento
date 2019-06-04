@@ -41,6 +41,7 @@
 <html>
     <% session.setAttribute("pageTitle", "Listagem de passageiro"); %>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
+    <%@include file="../WEB-INF/jspf/navbar.jspf" %>
     <body>
         <h1>Java DB</h1>
         <a href="formularioPassageiro.jsp">Incluir Passageiro</a>

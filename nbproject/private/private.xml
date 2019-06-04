@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/projetos/pupo/novo/Fretamento/src/java/br/com/fretamento/bo/Passageiro.java</file>
-            <file>file:/C:/projetos/pupo/novo/Fretamento/web/passageiro/pesquisaPassageiros.jsp</file>
-            <file>file:/C:/projetos/pupo/novo/Fretamento/web/passageiro/formularioPassageiro.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/linha/formularioLinhas.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/motorista/pesquisaMotoristas.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/WEB-INF/jspf/header.jspf</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/passageiro/pesquisaPassageiros.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/passageiro/formularioPassageiro.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/index.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/motorista/formularioMotorista.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/onibus/pesquisaOnibus.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/onibus/formularioOnibus.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/linha/pesquisaLinhas.jsp</file>
         </group>
     </open-files>
 </project-private>

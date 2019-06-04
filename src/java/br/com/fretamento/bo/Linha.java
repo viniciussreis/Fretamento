@@ -88,6 +88,10 @@ public class Linha {
     }
 
     public static void incluir(int numero, int idOnibus, String origem, String destino) throws Exception {
+        System.out.println(numero);
+        System.out.println(idOnibus);
+        System.out.println(origem);
+        System.out.println(destino);
         Connection con = Db.getConnection();
         String SQL = "INSERT INTO LINHA VALUES(DEFAULT, ?, ?, ?, ?)";
         PreparedStatement st = con.prepareStatement(SQL);
