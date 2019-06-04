@@ -7,69 +7,72 @@
 <%@page import="br.com.fretamento.bo.Onibus"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% Onibus onibusSelecionado = new Onibus();%>
+
 <%
     try {
-        Onibus onibus = new Onibus();
-        if (request.getParameter("cadastrar") != null) {
-            String placa = request.getParameter("placa");;
-            String numeracao = request.getParameter("numeracao");;
-            int idMotorista = Integer.parseInt(request.getParameter("idMotorista"));
-            int id=0;
-            if (request.getParameter("cadastrar").equals("Cadastrar")) {
-                onibus.incluir(idMotorista, placa, numeracao);
-            }
+        if (request.getParameter("id") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            onibusSelecionado.deletar(id);
+            response.sendRedirect(request.getRequestURI());
         }
-
-        if (request.getParameter("deletar") != null) {
-           int id = Integer.parseInt(request.getParameter("deletar"));
-            onibus.deletar(id);
-           response.sendRedirect(request.getRequestURI());
-        }
-
     } catch (Exception e) {
+        System.out.println("erro no método deletar" + e);
     }
 %>
 <html>
     <% session.setAttribute("pageTitle", "Listagem de ônibus"); %>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
     <%@include file="../WEB-INF/jspf/navbar.jspf" %>
+    
     <body>
-        <h1>Ônibus Existentes</h1>
-        <a href="formularioOnibus.jsp" >Incluir Ônibus</a>
-      
-        <form>  
+        <div class="text-left mb-3 text-center">
+            <h2>Onibus existentes</h2>
+            <a href="formularioOnibus.jsp">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
         <%try {%>
-            <% ArrayList<Onibus> listaOnibus = Onibus.getListaOnibus(); %>
-            <%if (listaOnibus != null && !listaOnibus.isEmpty()) { %>
-        
-        <table border="1">
-            
-            <tr>
-                    <th>ID Onibus</th>
-                    <th>Placa</th>
-                    <th>Numeracao</th>
-                    <th>Opções</th>
-            </tr>
-            
-                <% for (Onibus p : listaOnibus) {%>
-
-                <tr>
-                        <td><%=p.getId()%></td>
-                        <td><%=p.getPlaca()%></td>
-                        <td><%=p.getNumeracao()%></td>
-                   
-                <td>
-                        <a href="formularioOnibus.jsp?index=<%= p.getId()%>">Editar |</a>
-                        <a href="pesquisaOnibus.jsp?deletar=<%= p.getId()%>">Deletar</a>
-                    </td>
-                </tr><%}%>
-                <%} else {%>
-                <h3>Não existem ônibus cadastrados</h3>
-                <% } %>
-            </table>
+        <% ArrayList<Onibus> listaDeOnibus = Onibus.getListaOnibus(); %>
+        <%if (listaDeOnibus != null && !listaDeOnibus.isEmpty()) { %>
+        <div class="container">
+            <div class="row m-auto text-center pt-2 text-secondary" style="background-color: aliceblue; height: 40px;">
+                <div class="col-2">ID Onibus</div>
+                <div class="col-2">ID Motorista</div>
+                <div class="col-2">Númeração</div>
+                <div class="col-2">Placa</div>
+                <div class="col-2">Opções</div>
+            </div>
+            <% for (Onibus onibus : listaDeOnibus) {%>
+            <div class="row m-auto text-center pt-2 text-truncate" style="height: 40px">
+                <div class="col-2 mt-2">
+                    <%=onibus.getId()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=onibus.getIdMotorista()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=onibus.getNumeracao()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=onibus.getPlaca()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <a href="formularioOnibus.jsp?id=<%= onibus.getId()%>">
+                        <i style="color: gray" class="fa fa-edit"></i>
+                    </a>
+                    <a href="pesquisaOnibus.jsp?id=<%= onibus.getId()%>">
+                        <i style="color: red" class="ml-2 fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <%}%>
+            <%} else {%>
+            <h3>Não existem onibus cadastradas</h3>
+            <% } %>
             <%} catch (Exception e) {%>
             <h3 style="color: red"> <%= e.getMessage()%> </h3>
             <%}%>
-       </form>     
+        </div>
     </body>
 </html>

@@ -18,6 +18,26 @@ public class Onibus {
     private String placa;
     private String numeracao;
     
+    public static Onibus getOnibusById(int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = "SELECT * FROM ONIBUS WHERE ID_ONIBUS = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        
+        Onibus onibus = new Onibus();
+        if (rs.next()) {
+            onibus = new Onibus(
+                    rs.getInt("ID_ONIBUS"),
+                    rs.getInt("ID_MOTORISTA"),
+                    rs.getString("PLACA"),
+                    rs.getString("NUMERACAO")
+            );
+        }
+        
+        return onibus;
+    }
+    
     public static ArrayList<Onibus> getListaOnibus() throws Exception {
         Connection con = Db.getConnection();
         String SQL = "SELECT * FROM ONIBUS";
@@ -37,26 +57,39 @@ public class Onibus {
         
         return listaDeOnibus;
     }
+    
+        public static void atualizar(Onibus onibus, int id) throws Exception {
+        Connection con = Db.getConnection();
+        String SQL = 
+        "UPDATE ONIBUS SET ID_MOTORISTA = ?, NUMERACAO = ?, PLACA = ? WHERE ID_ONIBUS = ?";
+        PreparedStatement st = con.prepareStatement(SQL);
+        st.setInt(1, onibus.getIdMotorista());
+        st.setString(2, onibus.getNumeracao());
+        st.setString(3, onibus.getPlaca());
+        st.setInt(4, id);
+        st.executeUpdate();
+        st.close();
+        con.close();
+    }
 
     public static void deletar(int id) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "DELETE * FROM ONIBUS WHERE ID_ONIBUS = ?";
+        String SQL = "DELETE FROM ONIBUS WHERE ID_ONIBUS = ?";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setInt(1, id);
-        ResultSet rs = st.executeQuery();
-        rs.close();
+        st.executeUpdate();
         st.close();
         con.close();
     }
 
     public static void incluir(int idMotorista, String placa, String numeracao) throws Exception {
         Connection con = Db.getConnection();
-        String SQL = "INSERT INTO MOTORISTA VALUES(DEFAULT, ?, ?, ?)";
+        String SQL = "INSERT INTO ONIBUS VALUES(DEFAULT, ?, ?, ?)";
         PreparedStatement st = con.prepareStatement(SQL);
         st.setInt(1, idMotorista);
         st.setString(2, placa);
         st.setString(3, numeracao);
-        st.executeQuery();
+        st.executeUpdate();
         st.close();
         con.close();
     }
@@ -69,6 +102,8 @@ public class Onibus {
     }
 
     public Onibus() {
+        this.placa = "";
+        this.numeracao = "";
     }
     
     public int getId() {
