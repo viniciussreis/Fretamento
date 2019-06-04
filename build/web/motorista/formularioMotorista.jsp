@@ -6,40 +6,37 @@
 
 <%@page import="br.com.fretamento.bo.Motorista"%>
 <%
-    int id = 0;
-    Motorista motorista = new Motorista(-1, "", "", "", "");
+    try {
+        int id = 0;
+         
+        Motorista motorista = new Motorista();
+        
+        if (request.getParameter("cadastrar") != null) {
+            String nome = request.getParameter("nome");
+            String rg = request.getParameter("registroGeral");
+            String cnh = request.getParameter("cnh");
+            String endereco = request.getParameter("endereco");
 
-    String formAction = request.getParameter("id") != null ? "alterar" : "cadastrar";
+            Motorista.incluir(nome, cnh, rg, endereco);
+            response.sendRedirect("pesquisaMotoristas.jsp");
+        }
 
-    if (request.getParameter("id") != null) {
-        id = Integer.parseInt(request.getParameter("id"));
-        motorista = Motorista.getMotoristaById(id);
-    }
+        if (request.getParameter("id") != null) {
+            id = Integer.parseInt(request.getParameter("id"));
+            motorista = Motorista.getMotoristaById(id);
+        }
 
-    if (request.getParameter("cadastrar") != null) {
-        String nome = request.getParameter("nome");
-        String rg = request.getParameter("registroGeral");
-        String cnh = request.getParameter("cnh");
-        String endereco = request.getParameter("endereco");
-
-        Motorista.incluir(nome, cnh, rg, endereco);
-        response.sendRedirect("pesquisaMotoristas.jsp");
-    }
-
-    if (request.getParameter("alterar") != null) {
-        try {
+        if (request.getParameter("alterar") != null) {
+            
             motorista.setNome(request.getParameter("nome"));
             motorista.setEndereco(request.getParameter("endereco"));
             motorista.setCnh(request.getParameter("cnh"));
             motorista.setRegistroGeral(request.getParameter("registroGeral"));
-
+            
             Motorista.atualizar(motorista, id);
 
             response.sendRedirect("pesquisaMotoristas.jsp");
-        } catch (Exception e) {%>
-            <%= e.getMessage()%>
-        <%}
-    }
+        }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,8 +44,6 @@
     <% session.setAttribute("pageTitle", "Form motorista");%>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
-        <% try {%>
-        <%= formAction%>
         <h1>Formulário para adição de Motorista</h1>
         <form>
             <label>Nome</label>
@@ -60,11 +55,12 @@
             <label>Endereço</label>
             <input type="text" name="endereco" id="endereco" value="<%= motorista.getEndereco()%>"/>
 
-            <input type="submit" value="<%= formAction%>" name="<%= formAction%>"/>
-
-            <% if (formAction.equals("cadastrar")) {%>
-            <input type="hidden" name="index" value="<%= id%>">
-            <% }%>
+            <%if (request.getParameter("id") == null) {%>
+                <input type="submit" value="Cadastrar" name="cadastrar"/>
+            <%} else {%>
+                <input type="submit" value="Alterar" name="alterar" />
+            <%}%>
+                <input type="hidden" name="id" value="<%= id%>"/>
         </form>
         <%} catch (Exception e) {%>
         <%= e.getMessage()%>

@@ -48,6 +48,7 @@ public class Motorista {
         
         Motorista motorista = new Motorista();
         if (rs.next()) {
+            motorista.setId(rs.getInt("ID_MOTORISTA"));
             motorista.setCnh(rs.getString("CNH"));
             motorista.setEndereco(rs.getString("ENDERECO"));
             motorista.setRegistroGeral(rs.getString("REGISTRO_GERAL"));
@@ -103,6 +104,13 @@ public class Motorista {
         this.registroGeral = registroGeral;
         this.endereco = endereco;
     }
+    
+    public Motorista(){
+        this.nome = "";
+        this.cnh = "";
+        this.registroGeral = "";
+        this.endereco = "";
+    }
 
     public int getId() {
         return id;
@@ -144,5 +152,4 @@ public class Motorista {
         this.endereco = endereco;
     }
 
-    public Motorista(){}
 }

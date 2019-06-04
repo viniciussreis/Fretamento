@@ -11,7 +11,6 @@
 <%
     try {
         Motorista motorista = new Motorista();
-
         if (request.getParameter("deletar") != null) {
             int id = Integer.parseInt(request.getParameter("deletar"));
             Motorista.deletar(id);
