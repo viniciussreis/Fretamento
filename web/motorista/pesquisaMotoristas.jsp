@@ -11,25 +11,16 @@
 <%
     try {
         Motorista motorista = new Motorista();
-        if (request.getParameter("cadastrar") != null) {
-            String nome = request.getParameter("nome");;
-            String cnh = request.getParameter("cnh");;
-            String registroGeral = request.getParameter("registroGeral");
-            String endereco = request.getParameter("endereco");
-            int id = 0;
-            if (request.getParameter("cadastrar").equals("Cadastrar")) {
-                motorista.incluir(nome, cnh, registroGeral, endereco);
-            }
-        }
 
         if (request.getParameter("deletar") != null) {
             int id = Integer.parseInt(request.getParameter("deletar"));
-            motorista.deletar(id);
+            Motorista.deletar(id);
             response.sendRedirect(request.getRequestURI());
         }
 
-    } catch (Exception e) {
-    }
+    } catch (Exception e) { %>
+    <%= e.getMessage() %>
+    <%} 
 %>
 <html>
     <% session.setAttribute("pageTitle", "Listagem de motorista"); %>
@@ -75,7 +66,7 @@
                     <%=p.getEndereco()%>
                 </div>
                 <div class="col-2">
-                    <a href="formularioMotorista.jsp?index=<%= p.getId()%>">
+                    <a href="formularioMotorista.jsp?id=<%= p.getId()%>">
                         <i style="color: gray" class="fa fa-edit"></i>
                     </a>
                     <a href="pesquisaMotoristas.jsp?deletar=<%= p.getId()%>">

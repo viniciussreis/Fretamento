@@ -6,66 +6,68 @@
 
 <%@page import="br.com.fretamento.bo.Motorista"%>
 <%
-    Motorista motorista = new Motorista();
-    int id =0;
-    String nome = "";
-    String cnh = "";
-    String registroGeral = "";
-    String endereco = "";
-    
-    String valorBotao = "Cadastrar";
-    
-    
+    int id = 0;
+    Motorista motorista = new Motorista(-1, "", "", "", "");
+
+    String formAction = request.getParameter("id") != null ? "alterar" : "cadastrar";
+
+    if (request.getParameter("id") != null) {
+        id = Integer.parseInt(request.getParameter("id"));
+        motorista = Motorista.getMotoristaById(id);
+    }
+
+    if (request.getParameter("cadastrar") != null) {
+        String nome = request.getParameter("nome");
+        String rg = request.getParameter("registroGeral");
+        String cnh = request.getParameter("cnh");
+        String endereco = request.getParameter("endereco");
+
+        Motorista.incluir(nome, cnh, rg, endereco);
+        response.sendRedirect("pesquisaMotoristas.jsp");
+    }
+
+    if (request.getParameter("alterar") != null) {
+        try {
+            motorista.setNome(request.getParameter("nome"));
+            motorista.setEndereco(request.getParameter("endereco"));
+            motorista.setCnh(request.getParameter("cnh"));
+            motorista.setRegistroGeral(request.getParameter("registroGeral"));
+
+            Motorista.atualizar(motorista, id);
+
+            response.sendRedirect("pesquisaMotoristas.jsp");
+        } catch (Exception e) {%>
+            <%= e.getMessage()%>
+        <%}
+    }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% session.setAttribute("pageTitle", "Form motorista"); %>
+    <% session.setAttribute("pageTitle", "Form motorista");%>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
     <body>
+        <% try {%>
+        <%= formAction%>
         <h1>Formulário para adição de Motorista</h1>
-        <form action="pesquisaMotoristas.jsp">
+        <form>
             <label>Nome</label>
-            <input type="text" name="nome" id="nome" value="<%=nome%>"/>
+            <input type="text" name="nome" id="nome" value="<%= motorista.getNome()%>"/>
             <label>CNH</label>
-            <input type="text" name="cnh" id="cnh" value="<%=cnh%>"/>
+            <input type="text" name="cnh" id="cnh" value="<%= motorista.getCnh()%>"/>
             <label>RG</label>
-            <input type="text" name="registroGeral" id="registroGeral" value="<%=registroGeral%>"/>
+            <input type="text" name="registroGeral" id="registroGeral" value="<%= motorista.getRegistroGeral()%>"/>
             <label>Endereço</label>
-            <input type="text" name="endereco" id="endereco" value="<%=endereco%>"/>
-            
-            <input type="submit" value="<%= valorBotao%>" name="cadastrar"/>
+            <input type="text" name="endereco" id="endereco" value="<%= motorista.getEndereco()%>"/>
 
-            <% if (valorBotao.equals("Salvar")) {%>
+            <input type="submit" value="<%= formAction%>" name="<%= formAction%>"/>
+
+            <% if (formAction.equals("cadastrar")) {%>
             <input type="hidden" name="index" value="<%= id%>">
             <% }%>
         </form>
-    </body>
-    <body>
-        <h1>Formulário <%= request.getParameter("id") == null ? "Adicionar" : "Editar"%> Motorista</h1>
-        <hr>
-        <form>
-            <label>Número da Linha</label>
-            <input type="text" name="numeroLinha" id="numeroLinha" value="<%= linha.getNumero()%>"/>
-
-            <label>Onibus</label>
-            <select name="idOnibus">
-                <option></option>
-                <% for (Onibus onibus : listaDeOnibus) {%>
-                <option value="<%= onibus.getId()%>" <%= linha.getIdOnibus() == onibus.getId() ? "selected" : ""%>><%= onibus.getNumeracao()%></option>
-                <% }%>
-            </select>
-
-            <label>Origem</label>
-            <input type="text" name="origem" id="origem" value="<%= linha.getOrigem()%>"/>
-            <label>Destino</label>
-            <input type="text" name="destino" id="destido" value="<%= linha.getDestino()%>"/>
-            <%if (request.getParameter("id") == null) {%>
-            <input type="submit" value="Cadastrar" name="cadastrar"/>
-            <%} else {%>
-            <input type="submit" value="Alterar" name="alterar" />
-            <%}%>
-            <input type="hidden" name="id" value="<%= id%>"/>
-        </form>
+        <%} catch (Exception e) {%>
+        <%= e.getMessage()%>
+        <%}%>
     </body>
 </html>

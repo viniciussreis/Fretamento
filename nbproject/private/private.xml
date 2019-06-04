@@ -5,14 +5,12 @@
         <group>
             <file>file:/C:/Users/linkapi/java/Fretamento/web/linha/formularioLinhas.jsp</file>
             <file>file:/C:/Users/linkapi/java/Fretamento/web/motorista/pesquisaMotoristas.jsp</file>
-            <file>file:/C:/Users/linkapi/java/Fretamento/web/WEB-INF/jspf/header.jspf</file>
-            <file>file:/C:/Users/linkapi/java/Fretamento/web/passageiro/pesquisaPassageiros.jsp</file>
-            <file>file:/C:/Users/linkapi/java/Fretamento/web/passageiro/formularioPassageiro.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/src/java/br/com/fretamento/bo/Linha.java</file>
             <file>file:/C:/Users/linkapi/java/Fretamento/web/index.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/src/java/br/com/fretamento/bo/Motorista.java</file>
             <file>file:/C:/Users/linkapi/java/Fretamento/web/motorista/formularioMotorista.jsp</file>
-            <file>file:/C:/Users/linkapi/java/Fretamento/web/onibus/pesquisaOnibus.jsp</file>
-            <file>file:/C:/Users/linkapi/java/Fretamento/web/onibus/formularioOnibus.jsp</file>
             <file>file:/C:/Users/linkapi/java/Fretamento/web/linha/pesquisaLinhas.jsp</file>
+            <file>file:/C:/Users/linkapi/java/Fretamento/web/WEB-INF/jspf/navbar.jspf</file>
         </group>
     </open-files>
 </project-private>

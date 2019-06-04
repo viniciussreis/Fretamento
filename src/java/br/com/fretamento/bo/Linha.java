@@ -62,7 +62,7 @@ public class Linha {
         return listaDeLinhas;
     }
     
-        public static void atualizar(Linha linha, int id) throws Exception {
+    public static void atualizar(Linha linha, int id) throws Exception {
         Connection con = Db.getConnection();
         String SQL = 
         "UPDATE LINHA SET ID_ONIBUS = ?, NUMERO = ?, ORIGEM = ?, DESTINO = ? WHERE ID_LINHA = ?";
