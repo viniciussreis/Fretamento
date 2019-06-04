@@ -67,11 +67,11 @@
             <label>Destino</label>
             <input type="text" name="destino" id="destido" value="<%= linha.getDestino()%>"/>
             <%if (request.getParameter("id") == null) {%>
-            <input type="submit" value="Cadastrar" name="cadastrar"/>
+                <input type="submit" value="Cadastrar" name="cadastrar"/>
             <%} else {%>
-            <input type="submit" value="Alterar" name="alterar" />
+                <input type="submit" value="Alterar" name="alterar" />
             <%}%>
-            <input type="hidden" name="id" value="<%= id%>"/>
+                <input type="hidden" name="id" value="<%= id%>"/>
         </form>
     </body>
 </html>
