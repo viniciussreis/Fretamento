@@ -83,8 +83,12 @@
                     <%=p.getEndereco()%>
                 </div>
                 <div class="col-2 mt-2">
-                    <a href="formularioPassageiro.jsp?index=<%= p.getId()%>">Editar |</a>
-                    <a href="pesquisaPassageiros.jsp?deletar=<%= p.getId()%>">Deletar</a>
+                    <a href="formularioPassageiro.jsp?index=<%= p.getId()%>">
+                        <i style="color: gray" class="fa fa-edit"></i>
+                    </a>
+                    <a href="pesquisaPassageiros.jsp?deletar=<%= p.getId()%>">
+                        <i style="color: red" class="ml-2 fa fa-trash" aria-hidden="true"></i>
+                    </a>
                 </div> 
             </div>           
             <% } %>
