@@ -49,12 +49,12 @@
                 <i class="fa fa-plus"></i>
             </a>
         </div>
-        <form>
+        <div class="container">
             <%try {%>
             <% ArrayList<Passageiro> listaPassageiros = Passageiro.getListaPassageiros(); %>
             <%if (listaPassageiros != null && !listaPassageiros.isEmpty()) { %>
             <div class="row m-auto text-center pt-2 text-secondary" style="background-color: aliceblue; height: 40px;">
-                <div class="col-1">ID Passageiro</div>
+                <div class="col-1">ID</div>
                 <div class="col-1">ID Linha</div>
                 <div class="col-2">Nome</div>
                 <div class="col-2">CPF</div>
@@ -63,26 +63,26 @@
                 <div class="col-2">Opcões</div>
             </div>
             <% for (Passageiro p : listaPassageiros) {%>
-            <div class="row m-auto text-center pt-2 text-truncate" style="height: 40px">
-                <div class="col-1 mt-2">
+            <div class="row m-auto text-center pt-2 text-truncate mt-2" style="height: 40px">
+                <div class="col-1">
                     <%=p.getId()%>
                 </div>
-                <div class="col-1 mt-2">
+                <div class="col-1">
                     <%=p.getIdLinha()%>
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-2">
                     <%=p.getNome()%>
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-2">
                     <%=p.getCpf()%>
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-2">
                     <%=p.getRegistroGeral()%>
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-2">
                     <%=p.getEndereco()%>
                 </div>
-                <div class="col-2 mt-2">
+                <div class="col-2">
                     <a href="formularioPassageiro.jsp?index=<%= p.getId()%>">
                         <i style="color: gray" class="fa fa-edit"></i>
                     </a>
@@ -98,7 +98,7 @@
             <%} catch (Exception e) {%>
             <h3 style="color: red"> <%= e.getMessage()%> </h3>
             <%}%>
-        </form>
+        </div>
     </body>
 </body>
 </html>
