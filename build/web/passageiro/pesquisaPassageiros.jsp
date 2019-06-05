@@ -43,44 +43,54 @@
     <%@include file="../WEB-INF/jspf/header.jspf" %>
     <%@include file="../WEB-INF/jspf/navbar.jspf" %>
     <body>
-        <h1>Java DB</h1>
-        <a href="formularioPassageiro.jsp">Incluir Passageiro</a>
-
-        <h2>Passageiros existentes</h2>
-
+        <div class="text-left mb-3 text-center">
+            <h2>Passageiros existentes</h2>
+            <a href="formularioPassageiro.jsp">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
         <form>
             <%try {%>
             <% ArrayList<Passageiro> listaPassageiros = Passageiro.getListaPassageiros(); %>
             <%if (listaPassageiros != null && !listaPassageiros.isEmpty()) { %>
-            <table border="1">
-                <tr>
-                    <th>ID Passageiro</th>
-                    <th>ID Linha</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>RG</th>
-                    <th>Endereco</th>
-                    <th>Opcoes</th>
-                </tr>
-                <% for (Passageiro p : listaPassageiros) {%>
-
-                <tr>
-                    <td><%=p.getId()%></td>
-                    <td><%=p.getIdLinha()%></td>
-                    <td><%=p.getNome()%></td>
-                    <td><%=p.getCpf()%></td>
-                    <td><%=p.getRegistroGeral()%></td>
-                    <td><%=p.getEndereco()%></td>
-                    <td>
-                        <a href="formularioPassageiro.jsp?index=<%= p.getId()%>">Editar |</a>
-                        <a href="pesquisaPassageiros.jsp?deletar=<%= p.getId()%>">Deletar</a>
-                    </td>
-                </tr>
-                <%}%>
-                <%} else {%>
-                <h3>Não existem passageiros cadastrados</h3>
-                <% } %>
-            </table>
+            <div class="row m-auto text-center pt-2 text-secondary" style="background-color: aliceblue; height: 40px;">
+                <div class="col-1">ID Passageiro</div>
+                <div class="col-1">ID Linha</div>
+                <div class="col-2">Nome</div>
+                <div class="col-2">CPF</div>
+                <div class="col-2">RG</div>
+                <div class="col-2">Endereco</div>
+                <div class="col-2">Opcões</div>
+            </div>
+            <% for (Passageiro p : listaPassageiros) {%>
+            <div class="row m-auto text-center pt-2 text-truncate" style="height: 40px">
+                <div class="col-1 mt-2">
+                    <%=p.getId()%>
+                </div>
+                <div class="col-1 mt-2">
+                    <%=p.getIdLinha()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=p.getNome()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=p.getCpf()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=p.getRegistroGeral()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <%=p.getEndereco()%>
+                </div>
+                <div class="col-2 mt-2">
+                    <a href="formularioPassageiro.jsp?index=<%= p.getId()%>">Editar |</a>
+                    <a href="pesquisaPassageiros.jsp?deletar=<%= p.getId()%>">Deletar</a>
+                </div> 
+            </div>           
+            <% } %>
+            <%} else {%>
+            <h3>Não existem passageiros cadastrados</h3>
+            <% } %>
             <%} catch (Exception e) {%>
             <h3 style="color: red"> <%= e.getMessage()%> </h3>
             <%}%>
