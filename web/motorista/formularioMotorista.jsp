@@ -43,6 +43,7 @@
 <html>
     <% session.setAttribute("pageTitle", "Form motorista");%>
     <%@include file="../WEB-INF/jspf/header.jspf" %>
+    <%@include file="../WEB-INF/jspf/navbar.jspf" %>
     <body>
         <h1>Formulário para adição de Motorista</h1>
         <form>
@@ -56,11 +57,11 @@
             <input type="text" name="endereco" id="endereco" value="<%= motorista.getEndereco()%>"/>
 
             <%if (request.getParameter("id") == null) {%>
-                <input type="submit" value="Cadastrar" name="cadastrar"/>
+            <input type="submit" value="Cadastrar" name="cadastrar"/>
             <%} else {%>
-                <input type="submit" value="Alterar" name="alterar" />
+            <input type="submit" value="Alterar" name="alterar" />
             <%}%>
-                <input type="hidden" name="id" value="<%= id%>"/>
+            <input type="hidden" name="id" value="<%= id%>"/>
         </form>
         <%} catch (Exception e) {%>
         <%= e.getMessage()%>
